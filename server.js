@@ -42,6 +42,11 @@ app.get("/api/:date", function(req, res){
   }
 });
 
+app.get("/api/", function(req, res){
+  const string = new Date(Date.now());
+  res.json({"unix": Date.parse(string), "utc": string.toUTCString()});
+});
+
 
 
 // listen for requests :)
