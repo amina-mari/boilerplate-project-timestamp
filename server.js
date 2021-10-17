@@ -27,15 +27,14 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:date", function(req, res){
   let date = req.params.date;
   let unixDate = +date;
-  const dateSplitted = date.split('-');
+  const dateFormatted = new Date(date);
+  const dateUnix = new Date(unixDate);
   
-  if(dateSplitted.length == 3){
-    const string = new Date(date);
-    res.json({"unix": Date.parse(string), "utc": string.toUTCString()});
+  if(Date.parse(dateFormatted)){
+    res.json({"unix": Date.parse(dateFormatted), "utc": dateFormatted.toUTCString()});
   } 
-  else if(typeof unixDate == "number"){
-    const string = new Date(unixDate);
-    res.json({"unix": unixDate, "utc": string.toUTCString()});
+  else if(Date.parse(dateUnix)){
+    res.json({"unix": unixDate, "utc": dateUnix.toUTCString()});
   }
   else {
     res.json({"error": "Invalid Date"});
